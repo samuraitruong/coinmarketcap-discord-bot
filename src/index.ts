@@ -1,6 +1,5 @@
 import Discord from 'discord.js'
 import dotenv from 'dotenv';
-import { Coinspot } from './providers/coinspot';
 import commands from './commands';
 dotenv.config();
 
