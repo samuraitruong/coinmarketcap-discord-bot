@@ -12,7 +12,7 @@ export class TwitterFeedCommand extends CommandBase {
       if (!coin) return undefined;
 
       const feeds = await this.twitter.searchCoinFeeds(coin)
-      return feeds.map(x => '- ' + x.text).join('\n\n')
+      return feeds.map(x => `https://twitter.com/i/web/status/${x.id}`).join('\n\n')
     }
   }
 }
