@@ -23,8 +23,10 @@ import express from 'express';
     }
   });
   client.on('ready', async () => {
-    defaultChannel = await client.channels.cache.find(x => x.id === defaultChannelId);
-    defaultChannel.send('Hello, I am your crypto bot. glad to help you here.')
+    if (process.env.NODE_ENV !== 'development') {
+      defaultChannel = await client.channels.cache.find(x => x.id === defaultChannelId);
+      defaultChannel.send('Hello, I am your crypto bot. glad to help you here.')
+    }
   })
   client.login(process.env.BOT_TOKEN);
   const app = express()

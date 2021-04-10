@@ -107,6 +107,7 @@ export class CoinMarketCap implements BaseProvider {
       symbol: x.symbol,
       tags: x.tags,
       rank: x.cmcRank,
+      lastUpdated: x.lastUpdated,
       ...(usdQuote || {}),
       name: x.name,
     }

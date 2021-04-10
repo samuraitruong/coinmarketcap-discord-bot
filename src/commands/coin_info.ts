@@ -48,7 +48,7 @@ export class CoinInfoCommand extends CommandBase {
           )
           //.addField('Inline field title', 'Some value here', true)
           .setImage(`https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/${coin.id}.png`)
-          .setTimestamp()
+          .setTimestamp(coin.lastUpdated)
           .setFooter('Data by coinmarketcap.com', `https://s2.coinmarketcap.com/static/img/coins/64x64/${coin.id}.png`);
 
         return exampleEmbed

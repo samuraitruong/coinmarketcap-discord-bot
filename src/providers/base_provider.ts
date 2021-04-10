@@ -20,12 +20,13 @@ export interface CoinInfo {
   ytdPriceChangePercentage?: number;
   rank?: number;
   slug?: string;
-  tags? : string[]
+  tags?: string[]
 }
 
 
 export interface BaseProvider {
   getTopCoins: (numberOfItem?: number) => CoinInfo[];
-  getCoinNames: () => string[]
-  getCoin: (coin: string) => CoinInfo
+  getCoinNames: () => string[];
+  getCoin: (coin: string) => CoinInfo;
+  // getFeeds: (coin: string) => any[]
 }
