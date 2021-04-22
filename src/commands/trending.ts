@@ -11,7 +11,7 @@ export class TrendingCommand extends CommandBase {
       const trending = await this.cg.getTrending();
       const sortedList = sorted ? trending.coins.sort((a, b) => a.item.market_cap_rank - b.item.market_cap_rank) :
         trending.coins;
-      return sortedList.map(x => `${x.item.symbol}  ${"-".padStart(6 - x.item.symbol.length)}   ${x.item.name} [#${x.item.market_cap_rank}]`).join('\n')
+      return sortedList.map(x => `${x.item.symbol}  ${"-".padStart(6 - x.item.symbol.length)}   ${x.item.name} [#${sorted ? "" : x.item.market_cap_rank}]`).join('\n')
     }
   }
 }
