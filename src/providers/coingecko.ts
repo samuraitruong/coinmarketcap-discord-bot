@@ -5,9 +5,7 @@ import { BaseProvider, CoinInfo } from './base_provider';
 import { CoinGeckoClient } from 'coingecko-api-v3'
 
 export class CoinGecko implements BaseProvider {
-  private trending: any;
   private client = new CoinGeckoClient();
-  private rawData: any[]
   constructor() {
   }
 

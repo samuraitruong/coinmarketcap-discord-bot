@@ -43,13 +43,13 @@ import { trendingCommand } from './commands/index';
   let lastTrending = '';
   setInterval(async () => {
     console.log('Refresh trending...');
-    const res = await trendingCommand.handleInput(trendingCommand.command);
+    const res = await trendingCommand.handleInput(trendingCommand.command, true);
     if (res !== lastTrending) {
       console.log('trending has changed', res);
       lastTrending = res
       defaultChannel.send('Coin trending updated: ```' + lastTrending + ' ```')
     }
-  }, 10000)
+  }, 30000)
 
   const port = process.env.PORT || 5000;
   app.listen(port, () => {
