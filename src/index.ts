@@ -4,7 +4,6 @@ dotenv.config();
 import Discord from 'discord.js'
 import commands from './commands';
 import express from 'express';
-import { CoinGeckoClient } from 'coingecko-api-v3';
 import { trendingCommand } from './commands/index';
 
 
@@ -12,6 +11,7 @@ import { trendingCommand } from './commands/index';
   const client = new Discord.Client();
   const defaultChannelId = '827125469521379391';
   let defaultChannel;
+  let trendingChannel;
 
   client.on("message", async (message) => {
     for await (const cmd of commands) {
@@ -26,6 +26,7 @@ import { trendingCommand } from './commands/index';
   });
   client.on('ready', async () => {
     defaultChannel = await client.channels.cache.find(x => x.id === defaultChannelId);
+    trendingChannel = defaultChannel
 
     if (process.env.NODE_ENV !== 'development') {
       defaultChannel.send('Hello, I am your crypto bot. glad to help you here.')
