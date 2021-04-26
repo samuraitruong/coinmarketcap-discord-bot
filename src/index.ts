@@ -9,11 +9,14 @@ import { trendingCommand } from './commands/index';
 
 (async () => {
   const client = new Discord.Client();
-  const defaultChannelId = '827125469521379391';
+  const defaultChannelId = process.env.DEFAULT_CHANNEL_ID || '827125469521379391';
+  const trendingChannelId = process.env.DEFAULT_TRENDING_CHANNEL_ID || '835369480799387678';
+
   let defaultChannel;
   let trendingChannel;
 
   client.on("message", async (message) => {
+    // console.log(message)
     for await (const cmd of commands) {
       if (message.author.bot) return;
 
@@ -26,7 +29,7 @@ import { trendingCommand } from './commands/index';
   });
   client.on('ready', async () => {
     defaultChannel = await client.channels.cache.find(x => x.id === defaultChannelId);
-    trendingChannel = defaultChannel
+    trendingChannel = await client.channels.cache.find(x => x.id === trendingChannelId);
 
     if (process.env.NODE_ENV !== 'development') {
       defaultChannel.send('Hello, I am your crypto bot. glad to help you here.')
@@ -48,7 +51,7 @@ import { trendingCommand } from './commands/index';
     if (res !== lastTrending) {
       console.log('trending has changed', res);
       lastTrending = res
-      defaultChannel.send('Coin trending updated: ```' + lastTrending + ' ```')
+      trendingChannel.send('Coin trending updated: ```' + lastTrending + ' ```')
     }
   }, 30000)
 
