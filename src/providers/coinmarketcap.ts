@@ -1,6 +1,5 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import { timeStamp } from 'node:console';
 import WebSocket from 'ws';
 import { BaseProvider, CoinInfo } from './base_provider';
 
