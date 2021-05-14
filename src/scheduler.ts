@@ -2,13 +2,18 @@ import axios from 'axios';
 import { CoinMarketCap } from './providers/coinmarketcap';
 export class Scheduler {
   constructor(private cmc: CoinMarketCap) {
-    setInterval(this.updateGist.bind(this), 5 * 60 * 1000)
+    setInterval(this.updateGist.bind(this), 10 * 60 * 1000)
   }
   public addInterval(handler: () => void, interval: number) {
     setInterval(handler, interval)
   }
   private async updateGist() {
     const data = this.cmc.rawData;
+    const shitcoins = data.filter(x => {
+      const usd = x.quotes.find(q => q.name === 'USD');
+
+      return usd?.price < 0.000001 && usd?.price > 0
+    })
     console.log('Update gist')
     const GIST_TOKEN = process.env.GIST_AUTH_TOKEN;
     const GIST_ID = process.env.GIST_ID || '5c110628518dfd563a63212eb4599d00'
@@ -18,7 +23,11 @@ export class Scheduler {
           files: {
             "cmc.json": {
               content: JSON.stringify(data, null, 4)
+            },
+            "shitcoin.json": {
+              content: JSON.stringify(shitcoins, null, 4)
             }
+
           }
         }, {
           maxContentLength: 100000000,
