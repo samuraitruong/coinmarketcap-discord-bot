@@ -8,7 +8,7 @@ import { TrendingCommand } from './trending';
 import { CoinGecko } from '../providers/coingecko';
 import { GreedIndexCommand } from './greedCommand';
 
-const defaultProvider = new CoinMarketCap();
+export const defaultProvider = new CoinMarketCap();
 export const trendingCommand = new TrendingCommand(new CoinGecko());
 
 export default [

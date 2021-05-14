@@ -7,7 +7,7 @@ import { BaseProvider, CoinInfo } from './base_provider';
 export class CoinMarketCap implements BaseProvider {
   private lastUpdate = 0;
   private data: any;
-  private rawData: any[]
+  public rawData: any[]
   private socket: WebSocket;
   constructor() {
     this.socket = new WebSocket('wss://stream.coinmarketcap.com/price/latest');

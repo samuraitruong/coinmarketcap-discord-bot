@@ -4,10 +4,12 @@ dotenv.config();
 import Discord from 'discord.js'
 import commands from './commands';
 import express from 'express';
-import { trendingCommand } from './commands/index';
+import { trendingCommand, defaultProvider } from './commands/index';
+import { Scheduler } from './scheduler';
 
 
 (async () => {
+  const scheduler = new Scheduler(defaultProvider);
   const client = new Discord.Client();
   const defaultChannelId = process.env.DEFAULT_CHANNEL_ID || '827125469521379391';
   const trendingChannelId = process.env.DEFAULT_TRENDING_CHANNEL_ID || '835369480799387678';
@@ -41,19 +43,20 @@ import { trendingCommand } from './commands/index';
   app.get('/', (req, res) => {
     res.send('Hey, I am alive')
   })
-  app.get('/reminder', (req, res) => {
-    defaultChannel.send('Hello Boss. kindy reminder you to activate your StomGain :)')
-  })
+
+
   let lastTrending = '';
-  setInterval(async () => {
+
+  scheduler.addInterval(async () => {
     console.log('Refresh trending...');
     const res = await trendingCommand.handleInput(trendingCommand.command, true);
     if (res !== lastTrending) {
       console.log('trending has changed', res);
       lastTrending = res
-      trendingChannel.send('Coin trending updated: ```' + lastTrending + ' ```')
+      trendingChannel.send('Coin trending updated: \n```' + lastTrending + ' ```')
     }
   }, 30000)
+
 
   const port = process.env.PORT || 5000;
   app.listen(port, () => {
