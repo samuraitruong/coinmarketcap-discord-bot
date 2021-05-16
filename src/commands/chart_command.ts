@@ -1,7 +1,6 @@
 import { CommandBase } from './base_command';
 import { BaseProvider } from '../providers/base_provider';
 import { MessageEmbed } from 'discord.js'
-import { basename } from 'node:path';
 
 export class ChartCommand extends CommandBase {
   constructor(provider: BaseProvider) {
