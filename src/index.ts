@@ -6,9 +6,6 @@ import commands from './commands';
 import express from 'express';
 import { trendingCommand, defaultProvider } from './commands/index';
 import { Scheduler } from './scheduler';
-import { ensureFile } from 'fs-extra';
-import { findSourceMap } from 'node:module';
-
 
 (async () => {
   const scheduler = new Scheduler(defaultProvider);
