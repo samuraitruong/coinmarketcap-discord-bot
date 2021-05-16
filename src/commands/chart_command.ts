@@ -8,7 +8,7 @@ export class ChartCommand extends CommandBase {
 
   }
   async handleInput(input: string) {
-    const [cmd, coin, period] = input.split(' ').filter(Boolean).map(x => x.trim());
+    const [cmd, coin, period = ''] = input.split(' ').filter(Boolean).map(x => x.trim());
     const getMessage = (p: string) => {
       const message = new MessageEmbed();
       message.setImage(`http://coinspot-chart.herokuapp.com/chart_v1?period=${p}&coin=${coin}&lineWidth=1.5`)
