@@ -19,13 +19,16 @@ import { Scheduler } from './scheduler';
 
   client.on("message", async (message) => {
     // console.log(message)
+    if (message.author.bot) return;
     for await (const cmd of commands) {
-      if (message.author.bot) return;
 
       const outMessage = await cmd.handleInput(message.content);
-      console.log(outMessage)
       if (outMessage) {
-        message.reply(outMessage)
+        message.reply(outMessage);
+
+        if (cmd.stopChain) {
+          break;
+        }
       }
     }
   });

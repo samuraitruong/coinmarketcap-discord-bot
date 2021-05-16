@@ -7,11 +7,13 @@ import { Twitter } from '../providers/twiter';
 import { TrendingCommand } from './trending';
 import { CoinGecko } from '../providers/coingecko';
 import { GreedIndexCommand } from './greedCommand';
+import { ChartCommand } from './chart_command';
 
 export const defaultProvider = new CoinMarketCap();
 export const trendingCommand = new TrendingCommand(new CoinGecko());
 
 export default [
+  new ChartCommand(defaultProvider),
   new TopCoinCommand(defaultProvider),
   new CoinInfoCommand(defaultProvider),
   new CalcCommand(defaultProvider),

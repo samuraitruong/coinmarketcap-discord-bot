@@ -10,7 +10,9 @@ export class CoinInfoCommand extends CommandBase {
   async handleInput(input: string) {
     const coins = this.provider.getCoinNames();
     const inputWords = input.split(' ').map(x => x.toLocaleLowerCase());
-
+    if (inputWords.length > 1 && inputWords[0] === '/chart') {
+      return null;
+    }
     const matchedCoin = coins.find(coin => inputWords.includes('/' + coin) || coin === input.toLowerCase());
 
     if (matchedCoin) {

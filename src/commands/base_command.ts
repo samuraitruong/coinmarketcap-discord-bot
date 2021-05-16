@@ -11,7 +11,7 @@ export class CommandBase {
     notation: "compact",
     compactDisplay: "short"
   });
-  constructor(public command: string, public provider: BaseProvider) {
+  constructor(public command: string, public provider: BaseProvider, public stopChain = true) {
 
   }
 }
