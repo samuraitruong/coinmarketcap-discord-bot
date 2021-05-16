@@ -6,6 +6,8 @@ import commands from './commands';
 import express from 'express';
 import { trendingCommand, defaultProvider } from './commands/index';
 import { Scheduler } from './scheduler';
+import { ensureFile } from 'fs-extra';
+import { findSourceMap } from 'node:module';
 
 
 (async () => {
@@ -24,7 +26,11 @@ import { Scheduler } from './scheduler';
 
       const outMessage = await cmd.handleInput(message.content);
       if (outMessage) {
-        message.reply(outMessage);
+        if (Array.isArray(outMessage)) {
+          outMessage.map(x => message.reply(x))
+        }
+        else
+          message.reply(outMessage);
 
         if (cmd.stopChain) {
           break;
