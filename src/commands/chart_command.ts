@@ -19,7 +19,7 @@ export class ChartCommand extends CommandBase {
     if (cmd === this.command) {
       const periods = period.split(',') || [1, 3, 7, 15, 30, 60, 'max'].reverse();
 
-      return periods.map(x => getMessage(x))
+      return periods.map(x => getMessage(x.toString()))
     }
   }
 }
